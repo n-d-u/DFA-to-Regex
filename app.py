@@ -1,4 +1,5 @@
-import DfaToRegex
+# import DfaToRegex
+import stark
 import ToJSON
 import json
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -173,7 +174,8 @@ class Ui_MainWindow(object):
             # self.finalTB.setPlainText("")
 
             ToJSON.w2json(states, letters, tf2, startStates, finalStates)
-            DfaToRegex.Convertor()
+            # DfaToRegex.Convertor()
+            stark.Convertor()
 
             msg = QMessageBox()
             msg.setWindowTitle("Regular Expression")
