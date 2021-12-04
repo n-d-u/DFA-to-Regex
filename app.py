@@ -163,30 +163,45 @@ class Ui_MainWindow(object):
         self.label_6.setText(_translate("MainWindow", "<strong>DFA</strong> to Regex converter"))
 
     def onSubmit(self):
-        states = self.StatesTB.toPlainText().split()
-        self.StatesTB.setPlainText("")
-        letters = self.lettersTB.toPlainText().split()
-        self.lettersTB.setPlainText("")
-        tf = self.tfTB.toPlainText().split()
-        self.tfTB.setPlainText("")
-        tf2 = [[] * 3] * len(tf)
-        for i in range(len(tf2)):
-            tf2[i] = tf[i].split(";")
-        startStates = self.startTB.toPlainText().split()
-        self.startTB.setPlainText("")
-        finalStates = self.finalTB.toPlainText().split()
-        self.finalTB.setPlainText("")
+        try:
 
-        ToJSON.w2json(states, letters, tf2, startStates, finalStates)
-        DfaToRegex.Convertor()
+            states = self.StatesTB.toPlainText().split()
+            # self.StatesTB.setPlainText("")
+            letters = self.lettersTB.toPlainText().split()
+            # self.lettersTB.setPlainText("")
+            tf = self.tfTB.toPlainText().split()
+            # self.tfTB.setPlainText("")
+            tf2 = [[] * 3] * len(tf)
+            for i in range(len(tf2)):
+                tf2[i] = tf[i].split(";")
+            startStates = self.startTB.toPlainText().split()
+            # self.startTB.setPlainText("")
+            finalStates = self.finalTB.toPlainText().split()
+            # self.finalTB.setPlainText("")
 
-        msg = QMessageBox()
-        msg.setWindowTitle("Regular Expression")
-        msg.setIcon(QMessageBox.Information)
-        with open('outputMain.json') as json_file:
-            data = json.load(json_file)
-        msg.setText("   Regex:  " + str(data['regex'] + " \t\t\n\n"))
-        x = msg.exec_()
+            ToJSON.w2json(states, letters, tf2, startStates, finalStates)
+            DfaToRegex.Convertor()
+
+            msg = QMessageBox()
+            msg.setWindowTitle("Regular Expression")
+            msg.setIcon(QMessageBox.Information)
+            with open('outputMain.json') as json_file:
+                data = json.load(json_file)
+            msg.setText("   Regex:  " + str(data['regex'] + " \t\t\n\n"))
+            x = msg.exec_()
+            self.StatesTB.setPlainText("")
+            self.lettersTB.setPlainText("")
+            self.tfTB.setPlainText("")
+            self.startTB.setPlainText("")
+            self.finalTB.setPlainText("")
+
+        except Exception:
+
+            msg2 = QMessageBox()
+            msg2.setWindowTitle("Invalid Input")
+            msg2.setIcon(QMessageBox.Warning)
+            msg2.setText("   Invalid Input!  ")
+            x = msg2.exec_()
 
 
 import res_rc
