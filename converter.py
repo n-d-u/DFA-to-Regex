@@ -171,4 +171,3 @@ def Convertor():
 
     json.dump(regex, g)
 
-Convertor()
