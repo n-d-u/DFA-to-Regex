@@ -1,3 +1,6 @@
 # DFA-to-Regex
 
-pip install PyQt5
+requirements: PyQt5
+
+To run use:
+python3 app.py

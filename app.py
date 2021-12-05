@@ -1,4 +1,3 @@
-# import DfaToRegex
 import converter
 import ToJSON
 import json
