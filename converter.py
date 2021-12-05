@@ -44,6 +44,8 @@ def Convertor():
     f = open("static/json/inputMain.json", "r")
     dfa = json.load(f)
 
+    # If there exists multiple final states in the DFA, then convert
+    # all the final states into non-final states and create a new single final state.
     if len(dfa["final_states"]) > 1:
         for x in range(len(dfa["final_states"])):
             idx = len(dfa["transition_function"])
@@ -52,6 +54,9 @@ def Convertor():
 
         dfa["final_states"] = ["Qf"]
 
+
+    # If there exists any incoming edge to the initial state, then 
+    # create a new initial state having no incoming edge to it.
     start_state = dfa["start_states"][0]
     for x in range(len(dfa["transition_function"])):
         if start_state == dfa["transition_function"][x][2]:
@@ -61,7 +66,9 @@ def Convertor():
             start_state = "Qi"
             dfa["start_states"][0] = "Qi"
             break
-
+    
+    # If there exists any outgoing edge from the final state, 
+    # then create a new final state having no outgoing edge from it.
     final_state = dfa["final_states"][0]
     for x in range(len(dfa["transition_function"])):
         if final_state == dfa["transition_function"][x][0]:
@@ -71,6 +78,10 @@ def Convertor():
             dfa["final_states"] = ["Qf"]
             break
 
+
+    # After this we eliminate the states one by one. The order of 
+    # eliminating the states will start from that state which has the 
+    # least number of incoming + outgoing edges.
     intermediate_states = deepcopy(dfa["states"])
     check1 = dfa['start_states'][0]
     if check1 in intermediate_states:
@@ -86,7 +97,7 @@ def Convertor():
         exp = []
         state_to_remove = ie_edges[0][0]
         inc, out, self_loops = get_all_transitions(state_to_remove, dfa)
-
+    # Add a concatenation between the source state and the destination transitions of the destination state. 
         if len(self_loops) > 1:
             exp = []
             for lo in range(len(self_loops)):
@@ -99,6 +110,7 @@ def Convertor():
             exp.pop(idx)
             exp = ''.join(exp)
 
+        # For states with a self transition, add a kleen star.
         if len(self_loops) == 1:
             exp = self_loops[0][1]
         if len(self_loops) < 1:
@@ -133,10 +145,9 @@ def Convertor():
         # ie_edges.sort(key=lambda a:a[1][0]+a[1][1])
         size_intermediate = len(intermediate_states)
         size_transition = len(dfa["transition_function"])
-
+    # For same destination on different letters from the same source, add a union operator between them.
     fg = []
     finalregex = []
-
     for x in range(len(dfa["transition_function"])):
         idx = len(fg)
         val = dfa["transition_function"][x][1]
@@ -159,3 +170,5 @@ def Convertor():
     g = open("static/json/outputMain.json", 'w')
 
     json.dump(regex, g)
+
+Convertor()
