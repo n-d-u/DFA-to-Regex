@@ -34,6 +34,5 @@ def w2json(states, letters, tf2, startStates, finalStates):
         "final_states": finalStates
     }
     y = json.dumps(x)
-    with open("inputMain.json", "w") as outfile:
+    with open("static/json/inputMain.json", "w") as outfile:
         outfile.write(y)
-

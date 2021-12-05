@@ -1,10 +1,12 @@
 # import DfaToRegex
-import stark
+import converter
 import ToJSON
 import json
+import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
-
+sys.path.insert(1, './static/ui')
+import res_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -175,12 +177,12 @@ class Ui_MainWindow(object):
 
             ToJSON.w2json(states, letters, tf2, startStates, finalStates)
             # DfaToRegex.Convertor()
-            stark.Convertor()
+            converter.Convertor()
 
             msg = QMessageBox()
             msg.setWindowTitle("Regular Expression")
             msg.setIcon(QMessageBox.Information)
-            with open('outputMain.json') as json_file:
+            with open('static/json/outputMain.json') as json_file:
                 data = json.load(json_file)
             msg.setText("   Regex:  " + str(data['regex'] + " \t\t\n\n"))
             x = msg.exec_()
@@ -199,11 +201,8 @@ class Ui_MainWindow(object):
             x = msg2.exec_()
 
 
-import res_rc
 
 if __name__ == "__main__":
-    import sys
-
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()

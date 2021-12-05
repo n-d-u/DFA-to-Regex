@@ -48,7 +48,7 @@ def clearOldTransitions(reg, dfa):
 
 
 def Convertor():
-    f = open("inputMain.json", "r")
+    f = open("static/json/inputMain.json", "r")
     dfa = json.load(f)
 
     if len(dfa["final_states"]) > 1:
@@ -163,6 +163,6 @@ def Convertor():
             finalregex.append(dfa["transition_function"][0][1][x])
     regex = {}
     regex['regex'] = ''.join(finalregex)
-    g = open("outputMain.json", 'w')
+    g = open("static/json/outputMain.json", 'w')
 
     json.dump(regex, g)

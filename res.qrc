@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="newPrefix">
-    <file>geometry-background.png</file>
-    <file>bgc.png</file>
-  </qresource>
-</RCC>

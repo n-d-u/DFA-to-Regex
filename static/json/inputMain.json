@@ -1,0 +1,1 @@
+{"states": ["q1", "q0"], "letters": ["a", "b"], "transition_function": [["q1", "b", "q0"], ["q0", "b", "q1"]], "start_states": ["q0"], "final_states": ["q1"]}
