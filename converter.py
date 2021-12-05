@@ -40,7 +40,6 @@ def get_all_transitions(x_t, dfa):
     return incoming, outgoing, selfloop
 
 
-
 def Convertor():
     f = open("static/json/inputMain.json", "r")
     dfa = json.load(f)
@@ -79,7 +78,7 @@ def Convertor():
     check2 = dfa['final_states'][0]
     if check2 in intermediate_states:
         intermediate_states.remove(check2)
-    ie_edges = calinout(intermediate_states,dfa)
+    ie_edges = calinout(intermediate_states, dfa)
     size_intermediate = len(intermediate_states)
 
     size_transition = len(dfa["transition_function"])
@@ -130,7 +129,7 @@ def Convertor():
                 dfa["transition_function"].remove(self_loops[x])
 
         intermediate_states.remove(state_to_remove)
-        ie_edges = calinout(intermediate_states,dfa)
+        ie_edges = calinout(intermediate_states, dfa)
         # ie_edges.sort(key=lambda a:a[1][0]+a[1][1])
         size_intermediate = len(intermediate_states)
         size_transition = len(dfa["transition_function"])
