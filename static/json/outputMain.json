@@ -1,1 +1,1 @@
-{"regex": "(bb)*b"}
+{"regex": "(ab+ba+bbb)*"}

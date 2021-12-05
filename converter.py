@@ -40,12 +40,6 @@ def get_all_transitions(x_t, dfa):
     return incoming, outgoing, selfloop
 
 
-def clearOldTransitions(reg, dfa):
-    # global dfa
-    for x in range(len(reg)):
-        if reg[x] in dfa["transition_function"]:
-            dfa["transition_function"].remove(reg[x])
-
 
 def Convertor():
     f = open("static/json/inputMain.json", "r")
